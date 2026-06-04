@@ -1,0 +1,486 @@
+/* ============================================
+   InfraEnercom S.A.C. — Login Styles
+   Paleta: Verde #3a8c2f / Azul #1a3a6b / Dorado #f0c020
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --green-dark:   #2e7a22;
+  --green-main:   #3a8c2f;
+  --green-light:  #5db347;
+  --green-pale:   #e8f5e4;
+  --blue-dark:    #0f2447;
+  --blue-main:    #1a3a6b;
+  --blue-light:   #2a5298;
+  --gold:         #f0c020;
+  --gold-dark:    #c99a00;
+  --white:        #ffffff;
+  --gray-100:     #f4f6f8;
+  --gray-300:     #d0d7de;
+  --gray-500:     #7a8694;
+  --gray-700:     #3d4a5c;
+  --text-main:    #1a2333;
+  --error:        #d93025;
+  --success:      #1e7e34;
+  --radius-sm:    6px;
+  --radius-md:    10px;
+  --radius-lg:    16px;
+  --shadow-card:  0 8px 32px rgba(26,58,107,0.13), 0 2px 8px rgba(0,0,0,0.07);
+  --shadow-btn:   0 4px 14px rgba(58,140,47,0.35);
+  --transition:   0.2s cubic-bezier(0.4,0,0.2,1);
+}
+
+/* ── Body & Background ── */
+body {
+  font-family: 'Open Sans', sans-serif;
+  background: var(--blue-dark);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Geometric background pattern */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    linear-gradient(135deg, var(--blue-dark) 0%, var(--blue-main) 50%, #0f3520 100%);
+  z-index: 0;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  top: -200px; right: -200px;
+  width: 600px; height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(58,140,47,0.18) 0%, transparent 70%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.bg-orb {
+  position: fixed;
+  bottom: -150px; left: -150px;
+  width: 450px; height: 450px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(240,192,32,0.10) 0%, transparent 70%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Diamond decorative shapes (from logo) */
+.bg-diamonds {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.bg-diamonds span {
+  position: absolute;
+  display: block;
+  width: 40px; height: 40px;
+  border: 1.5px solid rgba(255,255,255,0.05);
+  transform: rotate(45deg);
+}
+
+.bg-diamonds span:nth-child(1)  { top: 10%;  left: 5%;   width: 50px;  height: 50px; }
+.bg-diamonds span:nth-child(2)  { top: 70%;  left: 8%;   width: 30px;  height: 30px; border-color: rgba(58,140,47,0.15); }
+.bg-diamonds span:nth-child(3)  { top: 20%;  right: 6%;  width: 60px;  height: 60px; border-color: rgba(240,192,32,0.08); }
+.bg-diamonds span:nth-child(4)  { bottom: 15%; right: 10%; width: 35px; height: 35px; }
+.bg-diamonds span:nth-child(5)  { top: 50%;  left: 50%;  width: 80px;  height: 80px; border-color: rgba(255,255,255,0.03); }
+
+/* ── Main wrapper ── */
+.login-wrapper {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 440px;
+  animation: fadeUp 0.55s cubic-bezier(0.4,0,0.2,1) both;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Card ── */
+.card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+/* ── Card Header ── */
+.card-header {
+  background: linear-gradient(135deg, var(--blue-main) 0%, var(--blue-dark) 100%);
+  padding: 2rem 2.25rem 1.75rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-header::after {
+  content: '';
+  position: absolute;
+  bottom: -1px; left: 0; right: 0;
+  height: 28px;
+  background: var(--white);
+  clip-path: ellipse(55% 100% at 50% 100%);
+}
+
+/* Accent line top */
+.card-header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--green-main), var(--gold), var(--green-light));
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 0.85rem;
+}
+
+/* Diamond logo recreation */
+.brand-logo {
+  flex-shrink: 0;
+  width: 48px; height: 48px;
+  position: relative;
+}
+
+.brand-logo svg {
+  width: 100%; height: 100%;
+}
+
+.brand-text {
+  line-height: 1.15;
+}
+
+.brand-name {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.45rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--white);
+}
+
+.brand-name em {
+  font-style: normal;
+  color: var(--green-light);
+}
+
+.brand-sac {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--gold);
+  vertical-align: middle;
+  margin-left: 3px;
+}
+
+.brand-tagline {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+}
+
+.header-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.6);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding-bottom: 0.5rem;
+}
+
+/* ── Card Body ── */
+.card-body {
+  padding: 1.5rem 2.25rem 2rem;
+}
+
+/* ── Panels ── */
+.panel { display: none; }
+.panel.active { display: block; }
+
+/* ── Section title ── */
+.section-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--blue-main);
+  margin-bottom: 0.3rem;
+}
+
+.section-sub {
+  font-size: 0.8rem;
+  color: var(--gray-500);
+  margin-bottom: 1.4rem;
+}
+
+/* ── Alert ── */
+.alert {
+  display: none;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  border-left: 3px solid transparent;
+}
+.alert.error   { display: flex; background: #fdf2f2; color: var(--error);   border-color: var(--error); }
+.alert.success { display: flex; background: #f0faf0; color: var(--success); border-color: var(--success); }
+.alert.info    { display: flex; background: #eef4ff; color: var(--blue-main); border-color: var(--blue-light); }
+.alert .alert-icon { margin-right: 8px; flex-shrink: 0; font-size: 1rem; }
+
+/* ── Form Fields ── */
+.field {
+  margin-bottom: 1.1rem;
+}
+
+.field label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--gray-700);
+  margin-bottom: 6px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.input-wrap {
+  position: relative;
+}
+
+.input-icon {
+  position: absolute;
+  left: 13px; top: 50%;
+  transform: translateY(-50%);
+  width: 18px; height: 18px;
+  color: var(--gray-500);
+  pointer-events: none;
+  transition: color var(--transition);
+}
+
+.field:focus-within .input-icon {
+  color: var(--green-main);
+}
+
+.input-wrap input {
+  width: 100%;
+  padding: 11px 42px 11px 42px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 0.88rem;
+  color: var(--text-main);
+  background: var(--gray-100);
+  border: 1.5px solid var(--gray-300);
+  border-radius: var(--radius-sm);
+  outline: none;
+  transition: border-color var(--transition), background var(--transition), box-shadow var(--transition);
+}
+
+.input-wrap input:focus {
+  border-color: var(--green-main);
+  background: var(--white);
+  box-shadow: 0 0 0 3px rgba(58,140,47,0.12);
+}
+
+.input-wrap input.has-error {
+  border-color: var(--error);
+  box-shadow: 0 0 0 3px rgba(217,48,37,0.1);
+}
+
+.input-wrap input::placeholder {
+  color: var(--gray-300);
+}
+
+.btn-toggle-pass {
+  position: absolute;
+  right: 11px; top: 50%;
+  transform: translateY(-50%);
+  background: none; border: none;
+  cursor: pointer;
+  color: var(--gray-500);
+  padding: 3px;
+  display: flex; align-items: center;
+  transition: color var(--transition);
+}
+.btn-toggle-pass:hover { color: var(--blue-main); }
+.btn-toggle-pass svg { width: 18px; height: 18px; }
+
+/* ── Forgot link ── */
+.row-forgot {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: -4px;
+  margin-bottom: 1.2rem;
+}
+
+.link {
+  font-size: 0.78rem;
+  color: var(--blue-light);
+  text-decoration: none;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color var(--transition);
+}
+.link:hover { color: var(--green-main); text-decoration: underline; }
+
+/* ── Primary Button ── */
+.btn-primary {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, var(--green-light) 0%, var(--green-main) 60%, var(--green-dark) 100%);
+  color: var(--white);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  box-shadow: var(--shadow-btn);
+  transition: opacity var(--transition), transform var(--transition), box-shadow var(--transition);
+  text-transform: uppercase;
+}
+.btn-primary:hover  { opacity: 0.92; box-shadow: 0 6px 20px rgba(58,140,47,0.45); }
+.btn-primary:active { transform: scale(0.98); }
+.btn-primary svg { width: 18px; height: 18px; }
+
+/* ── Divider ── */
+.divider {
+  display: flex; align-items: center; gap: 10px;
+  margin: 1.1rem 0;
+}
+.divider::before, .divider::after {
+  content: ''; flex: 1;
+  height: 1px; background: var(--gray-300);
+}
+.divider span {
+  font-size: 0.72rem; color: var(--gray-500);
+  letter-spacing: 0.05em; text-transform: uppercase;
+}
+
+/* ── Back link row ── */
+.row-back {
+  text-align: center;
+  margin-top: 0.75rem;
+}
+.row-back .link {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 0.8rem;
+}
+.row-back svg { width: 14px; height: 14px; }
+
+/* ── OTP Code Inputs ── */
+.otp-wrap {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+  margin-bottom: 1rem;
+}
+
+.otp-wrap input {
+  width: 100%;
+  aspect-ratio: 1;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--blue-main);
+  background: var(--gray-100);
+  border: 1.5px solid var(--gray-300);
+  border-radius: var(--radius-sm);
+  outline: none;
+  transition: border-color var(--transition), box-shadow var(--transition), background var(--transition);
+}
+
+.otp-wrap input:focus {
+  border-color: var(--green-main);
+  background: var(--white);
+  box-shadow: 0 0 0 3px rgba(58,140,47,0.12);
+}
+
+.otp-wrap input.filled {
+  border-color: var(--green-main);
+  background: var(--green-pale);
+  color: var(--green-dark);
+}
+
+/* ── Resend row ── */
+.resend-row {
+  display: flex; align-items: center; justify-content: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  color: var(--gray-500);
+  margin-bottom: 1.2rem;
+}
+.resend-row .link { font-size: 0.78rem; }
+#timer-display {
+  font-weight: 600;
+  color: var(--blue-main);
+  min-width: 38px;
+}
+
+/* ── Password strength bar ── */
+.pass-strength {
+  margin-top: 6px;
+  display: flex; gap: 4px;
+}
+.pass-strength span {
+  flex: 1; height: 3px;
+  border-radius: 99px;
+  background: var(--gray-300);
+  transition: background 0.3s;
+}
+.pass-strength.weak   span:nth-child(1)                          { background: #d93025; }
+.pass-strength.fair   span:nth-child(-n+2)                       { background: #f59e0b; }
+.pass-strength.strong span:nth-child(-n+3)                       { background: var(--green-main); }
+.pass-strength.great  span                                        { background: var(--green-dark); }
+
+.pass-label {
+  font-size: 0.72rem;
+  color: var(--gray-500);
+  text-align: right;
+  margin-top: 3px;
+}
+
+/* ── Footer ── */
+.card-footer {
+  padding: 0.85rem 2.25rem;
+  border-top: 1px solid var(--gray-100);
+  text-align: center;
+  font-size: 0.7rem;
+  color: var(--gray-500);
+  background: var(--gray-100);
+}
+.card-footer span { color: var(--green-main); font-weight: 600; }
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+  .card-header,
+  .card-body { padding-left: 1.4rem; padding-right: 1.4rem; }
+  .otp-wrap input { font-size: 1rem; }
+  .brand-name { font-size: 1.2rem; }
+}
