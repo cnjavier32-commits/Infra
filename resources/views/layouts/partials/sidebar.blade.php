@@ -1,133 +1,70 @@
-{{-- ============================================================
-     resources/views/layouts/partials/sidebar.blade.php
-     ============================================================ --}}
-@php
-  $currentRoute = request()->route()->getName();
-@endphp
-
-<aside class="app-sidebar" id="appSidebar" aria-label="Menú de navegación">
-
-  {{-- ── BRAND ── --}}
-  <div class="sidebar-brand">
-    <div class="brand-logo">
-      <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <polygon points="24,2 46,24 24,46 2,24" fill="none" stroke="#5db347" stroke-width="2.5"/>
-        <polygon points="24,8 38,24 24,40 10,24" fill="#1a3a6b" opacity=".9"/>
-        <polygon points="24,8 38,24 24,24 10,24" fill="#3a8c2f" opacity=".85"/>
-        <polygon points="24,22 28,24 24,26 20,24" fill="#f0c020"/>
-      </svg>
-    </div>
-    <div class="brand-content">
-      <div class="brand-name">
-        <em>Infra</em>Enercom<sub class="brand-sac">S.A.C.</sub>
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-head">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 40 40" fill="none">
+            <path d="M20 3 L34 11 V29 L20 37 L6 29 V11 Z" stroke="var(--gold)" stroke-width="2" fill="rgba(240,192,32,0.08)"/>
+            <path d="M20 3 V37 M6 11 L34 29 M34 11 L6 29" stroke="var(--gold)" stroke-width="1" opacity="0.35"/>
+            <circle cx="20" cy="20" r="4" fill="var(--gold)"/>
+          </svg>
+        </span>
+        <div class="brand-text">
+          <strong>InfraEnercom</strong>
+          <span>Inventario S.A.C.</span>
+        </div>
       </div>
-      <div class="brand-tagline">Sistema de Inventario</div>
+      <button class="sidebar-collapse-btn" id="collapseBtn" aria-label="Contraer menú">
+        <i data-lucide="panel-left-close"></i>
+      </button>
     </div>
-    <button class="sidebar-close" id="sidebarClose" aria-label="Cerrar menú">
-      <i class="ti ti-x" aria-hidden="true"></i>
-    </button>
-  </div>
-
-  {{-- ── NAV CONTENT ── --}}
-  <nav class="sidebar-nav" id="sidebarNav">
-
-    {{-- GENERAL --}}
-    <div class="nav-group">
-      <div class="nav-group-label">General</div>
-
-      <a href="{{ route('dashboard.index') }}"
-         class="nav-item {{ str_starts_with($currentRoute, 'dashboard') ? 'active' : '' }}">
-        <i class="ti ti-layout-dashboard" aria-hidden="true"></i>
-        <span>Dashboard</span>
-      </a>
-
-      <a href=""
-         class="nav-item {{ str_starts_with($currentRoute, 'reports') ? 'active' : '' }}">
-        <i class="ti ti-chart-bar" aria-hidden="true"></i>
-        <span>Traslados y/o Devoluciones</span>
-        <span class="nav-badge green">Nuevo</span>
-      </a>
+ 
+    <div class="nav-rail" aria-hidden="true">
+      <svg width="100%" height="100%" preserveAspectRatio="none" id="railSvg"></svg>
     </div>
-
-    {{-- INVENTARIO --}}
-    <div class="nav-group">
-      <div class="nav-group-label">Inventario</div>
-
-      {{-- Ingresos --}}
-      <div class="nav-item has-sub {{ str_starts_with($currentRoute, 'income') ? 'active open' : '' }}"
-           data-sub="sub-ingresos" onclick="toggleSub(this)">
-        <i class="ti ti-package-import" aria-hidden="true"></i>
-        <span>Ingresos</span>
-        <i class="ti ti-chevron-down sub-arrow" aria-hidden="true"></i>
-      </div>
-      <div class="nav-sub {{ str_starts_with($currentRoute, 'income') ? 'open' : '' }}" id="sub-ingresos">
-        <a href="{{ route('income.index') }}"
-           class="nav-item {{ $currentRoute === 'ingresos.index' ? 'active' : '' }}">
-          <i class="ti ti-plus" aria-hidden="true"></i><span>Nuevo ingreso</span>
-        </a>
-        <a href=""
-           class="nav-item {{ $currentRoute === 'ingresos.index' ? 'active' : '' }}">
-          <i class="ti ti-list" aria-hidden="true"></i><span>Historial</span>
-        </a>
-        <a href=""
-           class="nav-item {{ $currentRoute === 'ingresos.import' ? 'active' : '' }}">
-          <i class="ti ti-file-import" aria-hidden="true"></i><span>Importar</span>
-        </a>
-      </div>
-
-      {{-- Salidas --}}
-      <div class="nav-item has-sub {{ str_starts_with($currentRoute, 'salidas') ? 'active open' : '' }}"
-           data-sub="sub-salidas" onclick="toggleSub(this)">
-        <i class="ti ti-package-export" aria-hidden="true"></i>
-        <span>Salidas</span>
-        <i class="ti ti-chevron-down sub-arrow" aria-hidden="true"></i>
-      </div>
-      <div class="nav-sub {{ str_starts_with($currentRoute, 'salidas') ? 'open' : '' }}" id="sub-salidas">
-        <a href=""
-           class="nav-item {{ $currentRoute === 'salidas.create' ? 'active' : '' }}">
-          <i class="ti ti-minus" aria-hidden="true"></i><span>Nueva salida</span>
-        </a>
-        <a href=""
-           class="nav-item {{ $currentRoute === 'salidas.index' ? 'active' : '' }}">
-          <i class="ti ti-list" aria-hidden="true"></i><span>Historial</span>
-        </a>
-      </div>
-
-      <a href="{{ route('material.index') }}"
-         class="nav-item {{ str_starts_with($currentRoute, 'material.index') ? 'active' : '' }}">
-        <i class="ti ti-transfer" aria-hidden="true"></i>
-        <span>Materiales</span>
+ 
+    <!-- Cada <a data-view="..."> define una página. El atributo data-view
+         debe existir como clave en VIEW_TITLES dentro de script.js -->
+    <nav class="nav" id="mainNav">
+      <span class="nav-label">Operación</span>
+      <a href="#" class="nav-item is-active" data-view="dashboard" data-node>
+        <i data-lucide="layout-grid"></i><span>Panel general</span>
       </a>
+      <a href="#" class="nav-item" data-view="entradas" data-node>
+        <i data-lucide="arrow-down-to-line"></i><span>Entradas</span>
+      </a>
+      <a href="#" class="nav-item" data-view="salidas" data-node>
+        <i data-lucide="arrow-up-from-line"></i><span>Salidas</span>
+      </a>
+      <a href="#" class="nav-item" data-view="inventario" data-node>
+        <i data-lucide="boxes"></i><span>Materiales</span>
+      </a>
+ 
+      <span class="nav-label">Análisis</span>
+      <a href="#" class="nav-item" data-view="reportes" data-node>
+        <i data-lucide="bar-chart-3"></i><span>Reportes</span>
+      </a>
+      <a href="#" class="nav-item" data-view="alertas" data-node>
+        <i data-lucide="triangle-alert"></i><span>Alertas de stock</span>
+      </a>
+ 
+      <span class="nav-label">Sistema</span>
+      <a href="#" class="nav-item" data-view="config" data-node>
+        <i data-lucide="settings-2"></i><span>Configuración</span>
+      </a>
+    </nav>
+ 
+    <div class="sidebar-foot">
+      <div class="status-chip">
+        <span class="dot dot--pulse"></span>
+        Sincronizado hace 2 min
+      </div>
+      <div class="user-card">
+        <div class="avatar">JQ</div>
+        <div class="user-meta">
+          <strong>Javier Culqui</strong>
+          <span>Almacén · Andahuaylas</span>
+        </div>
+        <i data-lucide="chevron-right"></i>
+      </div>
     </div>
-
-    {{-- ADMINISTRACIÓN --}}
-    {{-- @if(auth()->user()->role === 'admin')
-    <div class="nav-group">
-      <div class="nav-group-label">Administración</div>
-
-      <a href=""
-         class="nav-item {{ str_starts_with($currentRoute, 'usuarios') ? 'active' : '' }}">
-        <i class="ti ti-users" aria-hidden="true"></i>
-        <span>Usuarios</span>
-      </a>
-
-      <a href=""
-         class="nav-item {{ str_starts_with($currentRoute, 'permisos') ? 'active' : '' }}">
-        <i class="ti ti-shield-lock" aria-hidden="true"></i>
-        <span>Permisos</span>
-      </a>
-
-      <a href=""
-         class="nav-item {{ str_starts_with($currentRoute, 'auditoria') ? 'active' : '' }}">
-        <i class="ti ti-file-text" aria-hidden="true"></i>
-        <span>Auditoría</span>
-      </a>
-    </div>
-    @endif --}}
-
-  </nav>{{-- /sidebar-nav --}}
-
-</aside>
-
-{{-- Overlay para móvil --}}
-<div class="sidebar-overlay" id="sidebarOverlay"></div>
+  </aside>
