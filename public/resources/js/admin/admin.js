@@ -141,4 +141,32 @@ window.AppShell = { showToast, setActiveView };
 
 /* ---------------- INIT ---------------- */
 
+const dropdown = document.querySelector(".user-dropdown");
+const button = document.getElementById("userMenuButton");
+
+button.addEventListener("click", function (e) {
+
+    e.stopPropagation();
+
+    dropdown.classList.toggle("active");
+
+});
+
+//Cerrar al hacer click fuera
+
+document.addEventListener("click", function () {
+
+    dropdown.classList.remove("active");
+
+});
+
+//Evitar que se cierre al hacer click dentro
+
+document.getElementById("userDropdown")
+.addEventListener("click", function(e){
+
+    e.stopPropagation();
+
+});
+
 pulseRail();

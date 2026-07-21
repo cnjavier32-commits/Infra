@@ -54,17 +54,55 @@
     </nav>
  
     <div class="sidebar-foot">
-      <div class="status-chip">
+    <div class="status-chip">
         <span class="dot dot--pulse"></span>
         Sincronizado hace 2 min
-      </div>
-      <div class="user-card">
-        <div class="avatar">JQ</div>
-        <div class="user-meta">
-          <strong>Javier Culqui</strong>
-          <span>Almacén · Andahuaylas</span>
-        </div>
-        <i data-lucide="chevron-right"></i>
-      </div>
     </div>
+
+    <div class="user-dropdown">
+
+        <button class="user-card" id="userMenuButton">
+            <div class="avatar">
+                {{ strtoupper(substr(auth()->user()->name,0,1)) }}
+            </div>
+
+            <div class="user-meta">
+                <strong>{{ auth()->user()->name }}</strong>
+                <span>Almacén · Abancay</span>
+            </div>
+
+            <i data-lucide="chevrons-up"></i>
+        </button>
+
+        <div class="dropdown-menu" id="userDropdown">
+
+            <a href="#">
+                <i data-lucide="user-round"></i>
+                <span>Perfil</span>
+            </a>
+
+            <a href="#">
+                <i data-lucide="bell"></i>
+                <span>Notificaciones</span>
+            </a>
+
+            <a href="#">
+                <i data-lucide="settings-2"></i>
+                <span>Configuración</span>
+            </a>
+
+            <div class="dropdown-divider"></div>
+
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit">
+                    <i data-lucide="log-out"></i>
+                    <span>Cerrar sesión</span>
+                </button>
+            </form>
+
+        </div>
+
+    </div>
+</div>
   </aside>
